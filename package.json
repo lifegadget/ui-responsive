@@ -1,6 +1,6 @@
 {
   "name": "ui-responsive-toolbelt",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Responsive tools for your Ember app",
   "directories": {
     "doc": "doc",
@@ -15,7 +15,21 @@
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "files": [
+    "Brocfile.js",
+    "LICENSE.md",
+    "README.md",
+    "addon",
+    "app",
+    "bower.json",
+    "config",
+    "index.js",
+    "package.json",
+    "testem.json",
+    "vendor"
+  ],
+  "author": "Ken Snyder <ken@ken.net>",
+  "main": "index.js",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
