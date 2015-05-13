@@ -1,18 +1,20 @@
 import Ember from 'ember';
 const { computed, observer, A, $, run, on, typeOf, debug } = Ember;    // jshint ignore:line
-const defaultViewports = [
+const defaultBreakpoints = [
   { id: 'mobile', max: 768, synonyms: ['xs','tiny']},
   { id: 'tablet', min: 769, max: 992, synonyms: ['sm','small'] },
   { id: 'desktop', min: 993, max: 1200, snyonyms: ['md','medium'] },
   { id: 'jumbo', min: 1201, synonyms: ['md','medium'] }
 ]; 
 
-export default Ember.Service.extend({
+let Responsive = Ember.Service.extend({
   init: function() {
     this._resize = run.bind(this, 'resize');
     $(window).on('resize', this._resize);
     this.resize(); // initialize before any events fired
   },
+  resizeMutex: null,
+  breakpoints: defaultBreakpoints,
   
   resize: function() {
     const w = window, doc = window.document.documentElement, body = window.document.body;
@@ -34,13 +36,17 @@ export default Ember.Service.extend({
       availWidth: w.screen.availWidth, // http://www.quirksmode.org/dom/w3c_cssom.html#t10
       availHeight: w.screen.availHeight
     });
+    this.signalEvent(); // signals change on mutex for CP's to listen in on
   },
   
   namedViewports: function(setter=null) {
-    const viewports = setter ? setter : defaultViewports; // jshint ignore:line
+    const breakpoints = setter ? setter : defaultBreakpoints; // jshint ignore:line
     if(setter) {
-      
+      this.set('breakpoints', breakpoints);
     }
+  },
+  signalEvent: function() {
+    this.notifyPropertyChange('resizeMutex');
   },
   
   destroy: function() {
@@ -49,3 +55,6 @@ export default Ember.Service.extend({
   }
   
 });
+
+export default Responsive;
+export var signalEvent = Responsive.signalEvent; 

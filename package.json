@@ -1,6 +1,6 @@
 {
   "name": "ui-responsive-toolbelt",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Responsive tools for your Ember app.",
   "directories": {
     "doc": "doc",
@@ -11,7 +11,7 @@
     "build": "ember build",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "https://github.com/lifegadget/ui-responsive-toolbelt",
   "engines": {
     "node": ">= 0.10.0"
   },

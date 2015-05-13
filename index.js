@@ -2,5 +2,6 @@
 'use strict';
 
 module.exports = {
-  name: 'ui-responsive-toolbelt'
+  name: 'ui-responsive-toolbelt',
+  description: 'Responsive tools for your Ember app'
 };
