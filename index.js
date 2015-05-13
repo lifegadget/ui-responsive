@@ -3,5 +3,8 @@
 
 module.exports = {
   name: 'ui-responsive-toolbelt',
-  description: 'Responsive tools for your Ember app'
+  description: 'Responsive tools for your Ember app',
+  included: function(app) {
+    this._super.included(app);
+  }
 };

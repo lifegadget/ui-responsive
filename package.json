@@ -1,7 +1,7 @@
 {
   "name": "ui-responsive-toolbelt",
-  "version": "0.0.3",
-  "description": "Responsive tools for your Ember app.",
+  "version": "0.0.4",
+  "description": "Responsive tools for your Ember app",
   "directories": {
     "doc": "doc",
     "test": "tests"
