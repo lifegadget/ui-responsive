@@ -17,18 +17,21 @@ test('it exists', function(assert) {
   assert.ok(service);
 });
 
-// test('listening on the mutex', function(assert) {
-//   const TestObject = Ember.Object.extend({
-//     responsive: Ember.inject.service(),
-//     signalEvent: Ember.inject.service('responsive:signalEvent'),
-//     changeHappened: false,
-//     listener: Ember.computed('responsive.mutex', function() {
-//       this.set('changeHappened', true);
-//     })
-//   });
-//   let object = TestObject.create();
-//   assert.ok(!object.get('changeHappened'), 'no change should have happened yet');
-//   object.signalEvent();
-//   assert.ok(object.get('changeHappened'), 'a change should have been detected');
-//
-// });
+test('breakpoints', function(assert) {
+  let component = this.subject();
+  // setup
+  assert.ok(component.breakpoints, 'INIT: breakpoints should be accessible');
+  assert.ok(component.width > 0, 'INIT: width should be set at some value greater than zero');
+  // let the magic begin
+  component.configureBreakpoints(100,100);
+  assert.ok(component.isMobile, 'should be identified as a mobile device');
+  assert.ok(!component.isDesktop, 'should not be identified as a desktop device');
+  assert.ok(true, 'INFO: switching to desktop size');
+  component.configureBreakpoints(1000,1000);
+  assert.ok(!component.isMobile, 'should not be identified as a mobile device');
+  assert.ok(component.isDesktop, 'should be identified as a desktop device');
+  assert.ok(true, 'INFO: switching to jumbo size');
+  component.configureBreakpoints(2000,2000);
+  assert.ok(!component.isDesktop, 'should not be identified as a desktop device');
+  assert.ok(component.isJumbo, 'should be identified as a Jumbo device');
+});

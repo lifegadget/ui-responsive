@@ -33,6 +33,27 @@ Now you can reference the services various information services including:
 
 Also there is a simple `width` and `height` property which are aliases to the viewport properties.
 
+There is also now a handy breakpoint naming convention supported too. The default configuration is:
+
+````javascript
+[
+  { id: 'mobile', max: 768},
+  { id: 'tablet', min: 769, max: 992 },
+  { id: 'desktop', min: 993, max: 1200 },
+  { id: 'large', min: 1201, max: 1899 },
+  { id: 'jumbo', min: 1900 }
+];
+````
+
+You can set this to whatever you like by:
+
+````javascript
+this.responsive.setBreakpoints(myBrilliantBreakpoints);
+````
+
+Now you'll see that the has a set of boolean flags like `isMobile`, `isTablet`, etc. which indicate the state you 
+are in. 
+
 ### Responsive Mixin ###
 
 If all you want is to be notified in your own code about a resize event then you can include this

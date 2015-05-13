@@ -1,20 +1,23 @@
 import Ember from 'ember';
 const { computed, observer, A, $, run, on, typeOf, debug } = Ember;    // jshint ignore:line
+const capitalize = Ember.String.capitalize;
 const defaultBreakpoints = [
   { id: 'mobile', max: 768, synonyms: ['xs','tiny']},
   { id: 'tablet', min: 769, max: 992, synonyms: ['sm','small'] },
   { id: 'desktop', min: 993, max: 1200, snyonyms: ['md','medium'] },
-  { id: 'jumbo', min: 1201, synonyms: ['md','medium'] }
+  { id: 'large', min: 1201, max: 1899, synonyms: ['lg','large'] },
+  { id: 'jumbo', min: 1900, synonyms: ['hg','huge'] }
 ]; 
 
 let Responsive = Ember.Service.extend({
   init: function() {
     this._resize = run.bind(this, 'resize');
     $(window).on('resize', this._resize);
+    this.setBreakpoints();
     this.resize(); // initialize before any events fired
   },
   resizeMutex: null,
-  breakpoints: defaultBreakpoints,
+  breakpoints: null,
   
   resize: function() {
     const w = window, doc = window.document.documentElement, body = window.document.body;
@@ -36,14 +39,23 @@ let Responsive = Ember.Service.extend({
       availWidth: w.screen.availWidth, // http://www.quirksmode.org/dom/w3c_cssom.html#t10
       availHeight: w.screen.availHeight
     });
+    this.configureBreakpoints(viewportWidth, viewportHeight);
     this.signalEvent(); // signals change on mutex for CP's to listen in on
   },
   
-  namedViewports: function(setter=null) {
+  setBreakpoints: function(setter) {
     const breakpoints = setter ? setter : defaultBreakpoints; // jshint ignore:line
-    if(setter) {
-      this.set('breakpoints', breakpoints);
+    this.set('breakpoints', breakpoints);
+  },
+  configureBreakpoints: function(width,height) {
+    const breakpoints = this.get('breakpoints');
+    for(let breakpoint in breakpoints) {
+      const logicOperand = 'is' + capitalize(breakpoints[breakpoint].id);
+      const { min, max } = breakpoints[breakpoint];
+      const logicCondition = (!min || width >= min) && (!max || width<max);
+      this.set(logicOperand, logicCondition);
     }
+    height = height; // grand-silliness ... will use height later, don't jshint reminding me now
   },
   signalEvent: function() {
     this.notifyPropertyChange('resizeMutex');
