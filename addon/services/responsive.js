@@ -49,9 +49,9 @@ let Responsive = Ember.Service.extend({
   },
   configureBreakpoints: function(width,height) {
     const breakpoints = this.get('breakpoints');
-    for(let breakpoint in breakpoints) {
-      const logicOperand = 'is' + capitalize(breakpoints[breakpoint].id);
-      const { min, max } = breakpoints[breakpoint];
+    for (var i=0; i<breakpoints.length; i++) {
+      const logicOperand = 'is' + capitalize(breakpoints[i].id);
+      const { min, max } = breakpoints[i];
       const logicCondition = (!min || width >= min) && (!max || width<max);
       this.set(logicOperand, logicCondition);
     }
