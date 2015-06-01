@@ -7,7 +7,7 @@ const defaultBreakpoints = [
   { id: 'desktop', min: 993, max: 1200, snyonyms: ['md','medium'] },
   { id: 'large', min: 1201, max: 1899, synonyms: ['lg','large'] },
   { id: 'jumbo', min: 1900, synonyms: ['hg','huge'] }
-]; 
+];
 
 let Responsive = Ember.Service.extend({
   init: function() {
@@ -18,7 +18,7 @@ let Responsive = Ember.Service.extend({
   },
   resizeMutex: null,
   breakpoints: null,
-  
+
   resize: function() {
     const w = window, doc = window.document.documentElement, body = window.document.body;
     const viewportWidth = w.innerWidth || doc.clientWidth;
@@ -29,7 +29,7 @@ let Responsive = Ember.Service.extend({
       width: viewportWidth,
       height: viewportHeight
     });
-    this.set('body', { 
+    this.set('body', {
       width: body.clientWidth,
       height: body.clientHeight
     });
@@ -42,7 +42,7 @@ let Responsive = Ember.Service.extend({
     this.configureBreakpoints(viewportWidth, viewportHeight);
     this.signalEvent(); // signals change on mutex for CP's to listen in on
   },
-  
+
   setBreakpoints: function(setter) {
     const breakpoints = setter ? setter : defaultBreakpoints; // jshint ignore:line
     this.set('breakpoints', breakpoints);
@@ -60,13 +60,12 @@ let Responsive = Ember.Service.extend({
   signalEvent: function() {
     this.notifyPropertyChange('resizeMutex');
   },
-  
+
   destroy: function() {
     $(window).off('resize', this._resize);
     this._super();
   }
-  
+
 });
 
 export default Responsive;
-export var signalEvent = Responsive.signalEvent; 

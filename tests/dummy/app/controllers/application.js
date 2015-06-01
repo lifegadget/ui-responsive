@@ -1,12 +1,14 @@
 import Ember from 'ember';
+const { computed, observer, $, A, run, on, typeOf, debug, keys, get, set, inject } = Ember;    // jshint ignore:line
 
 export default Ember.Controller.extend({
 
+  responsive: inject.service(),
   isRepressed: false,
-  toggledEnablement: false, 
+  toggledEnablement: false,
   isIndexPage: Ember.computed.equal('currentPath', 'index'),
   notIndexPage: Ember.computed.not('isIndexPage'),
-  
+
   actions: {
     toggleRepression: function() {
       console.log('toggling');
