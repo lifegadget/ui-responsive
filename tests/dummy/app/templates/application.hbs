@@ -1,16 +1,67 @@
 <div class="container">
-    <h1 id="title">ui-responsive-toolkit</h1>
-    <h2>Responsive tools for your Ember app</h2>
-    
-    <div class="col-xs-3">
-      <img src='/images/tomster-construction.png'>
+  <h1 id="title">ui-responsive-toolkit</h1>
+  <h2>Responsive tools for your Ember app</h2>
+
+  <div class="col-xs-12 col-sm-5">
+    <img src='/images/tomster-construction.png'>
+  </div>
+  <div class="col-xs-12 col-sm-7">
+    <h3>Resources</h3>
+    <ul>
+      <li><a href="">GitHub Repo</a></li>
+      <li><a href="tests?nocontainer">Unit tests</a></li>
+    </ul>
+  </div>
+  <div class="col-xs-12">
+    <h3>Responsive Data</h3>
+    <div class="row downer">
+      <div class="col-xs-3">width:</div>
+      <div class="col-xs-9">{{responsive.width}}</div>
     </div>
-    <div class="col-xs-9">
-      <p>&nbsp;</p>
-      <ul>
-        <li><a href="">GitHub Repo</a></li>
-        <li><a href="tests?nocontainer">Unit tests</a></li>
-      </ul>      
+    <div class="row downer">
+      <div class="col-xs-3">Height:</div>
+      <div class="col-xs-9">{{responsive.height}}</div>
     </div>
+    <div class="row downer">
+      <div class="col-xs-3">Screen:</div>
+      <div class="col-xs-9 smaller">{{screenJson}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-3">Body:</div>
+      <div class="col-xs-9 smaller">{{bodyJson}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-3">deviceType:</div>
+      <div class="col-xs-9 ">{{responsive.deviceType}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-12">Flags:</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-1"> </div>
+      <div class="col-xs-2 smaller">isMobile</div>
+      <div class="col-xs-9 smaller">{{responsive.isMobile}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-1"> </div>
+      <div class="col-xs-2 smaller">isTablet</div>
+      <div class="col-xs-9 smaller">{{responsive.isTablet}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-1"> </div>
+      <div class="col-xs-2 smaller">isDesktop</div>
+      <div class="col-xs-9 smaller">{{responsive.isDesktop}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-1"> </div>
+      <div class="col-xs-2 smaller">isLarge</div>
+      <div class="col-xs-9 smaller">{{responsive.isLarge}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-1"> </div>
+      <div class="col-xs-2 smaller">isHuge</div>
+      <div class="col-xs-9 smaller">{{responsive.isHuge}}</div>
+    </div>
+  </div>
 </div>
 

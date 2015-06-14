@@ -1,6 +1,6 @@
 {
   "name": "ui-responsive-toolbelt",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Responsive tools for your Ember app",
   "directories": {
     "doc": "doc",
@@ -55,6 +55,7 @@
     "ember-cli-babel": "^5.0.0"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "demoURL": "development.ui-responsive-toolbelt.divshot.io"
   }
 }

@@ -3,10 +3,10 @@ const { computed, observer, A, $, run, on, typeOf, debug } = Ember;    // jshint
 const capitalize = Ember.String.capitalize;
 const defaultBreakpoints = [
   { id: 'mobile', max: 768, synonyms: ['xs','tiny']},
-  { id: 'tablet', min: 769, max: 992, synonyms: ['sm','small'] },
-  { id: 'desktop', min: 993, max: 1200, snyonyms: ['md','medium'] },
-  { id: 'large', min: 1201, max: 1899, synonyms: ['lg','large'] },
-  { id: 'jumbo', min: 1900, synonyms: ['hg','huge'] }
+  { id: 'tablet', min: 768, max: 992, synonyms: ['sm','small'] },
+  { id: 'desktop', min: 992, max: 1200, snyonyms: ['md','medium'] },
+  { id: 'large', min: 1200, max: 1900, synonyms: ['lg','large'] },
+  { id: 'huge', min: 1900, synonyms: ['hg','huge'] }
 ];
 
 let Responsive = Ember.Service.extend({
@@ -49,12 +49,15 @@ let Responsive = Ember.Service.extend({
   },
   configureBreakpoints: function(width,height) {
     const breakpoints = this.get('breakpoints');
+    let deviceType = null;
     for (var i=0; i<breakpoints.length; i++) {
-      const logicOperand = 'is' + capitalize(breakpoints[i].id);
-      const { min, max } = breakpoints[i];
+      const { id, min, max } = breakpoints[i];
+      const logicOperand = 'is' + capitalize(id);
       const logicCondition = (!min || width >= min) && (!max || width<max);
       this.set(logicOperand, logicCondition);
+      deviceType = logicCondition ? id : deviceType;
     }
+    this.set('deviceType', deviceType);
     height = height; // grand-silliness ... will use height later, don't jshint reminding me now
   },
   signalEvent: function() {

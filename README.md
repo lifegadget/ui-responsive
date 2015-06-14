@@ -33,17 +33,17 @@ Now you can reference the services various information services including:
 - *screen* - the total and available screen real estate on the users system (not the browsers)
 - *body* - height, width of the body element
 
-Also there is a simple `width` and `height` property which are aliases to the viewport properties.
+Also there is a simple `width` and `height` properties which are aliases to the viewport properties.
 
 There is also now a handy breakpoint naming convention supported too. The default configuration is:
 
 ````javascript
 [
   { id: 'mobile', max: 768},
-  { id: 'tablet', min: 769, max: 992 },
-  { id: 'desktop', min: 993, max: 1200 },
-  { id: 'large', min: 1201, max: 1899 },
-  { id: 'jumbo', min: 1900 }
+  { id: 'tablet', min: 768, max: 992 },
+  { id: 'desktop', min: 992, max: 1200 },
+  { id: 'large', min: 1200, max: 1899 },
+  { id: 'huge', min: 1900 }
 ];
 ````
 
@@ -53,15 +53,11 @@ You can set this to whatever you like by:
 this.responsive.setBreakpoints(myBrilliantBreakpoints);
 ````
 
-Now you'll see that the has a set of boolean flags like `isMobile`, `isTablet`, etc. which indicate the state you 
-are in. 
+Now you'll see that the has a set of boolean flags like `isMobile`, `isTablet`, etc. which indicate the state you are in. As a convenience you can also get a string name back for the breakpoint size with the `deviceType` property. 
 
-### Responsive Mixin ###
+## Demo
 
-If all you want is to be notified in your own code about a resize event then you can include this
-mixin and it will trigger a `didResizeElement` event when a resize has taken place. 
-
-> Note: mixin is not implemented yet
+For an interactive demo (you'll have to change your screen size to make it be *interactive*): [ui-responsive-toolbelt](development.ui-responsive-toolbelt.divshot.io).
 
 ## Version Compatibility
 

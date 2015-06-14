@@ -9,6 +9,13 @@ export default Ember.Controller.extend({
   isIndexPage: Ember.computed.equal('currentPath', 'index'),
   notIndexPage: Ember.computed.not('isIndexPage'),
 
+  screenJson: computed('responsive.width', function() {
+    return JSON.stringify(this.get('responsive.screen'));
+  }),
+  bodyJson: computed('responsive.width', function() {
+    return JSON.stringify(this.get('responsive.body'));
+  }),
+
   actions: {
     toggleRepression: function() {
       console.log('toggling');
