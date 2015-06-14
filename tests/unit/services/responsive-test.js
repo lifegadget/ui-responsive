@@ -30,8 +30,8 @@ test('breakpoints', function(assert) {
   component.configureBreakpoints(1000,1000);
   assert.ok(!component.isMobile, 'should not be identified as a mobile device');
   assert.ok(component.isDesktop, 'should be identified as a desktop device');
-  assert.ok(true, 'INFO: switching to jumbo size');
+  assert.ok(true, 'INFO: switching to huge size');
   component.configureBreakpoints(2000,2000);
   assert.ok(!component.isDesktop, 'should not be identified as a desktop device');
-  assert.ok(component.isJumbo, 'should be identified as a Jumbo device');
+  assert.ok(component.isHuge, 'should be identified as a Huge device');
 });
