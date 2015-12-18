@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 id="title">ui-responsive-toolkit</h1>
+  <h1 id="title">ui-responsive</h1>
   <h2>Responsive tools for your Ember app</h2>
 
   <div class="col-xs-12 col-sm-5">
@@ -62,6 +62,56 @@
       <div class="col-xs-2 smaller">isHuge</div>
       <div class="col-xs-9 smaller">{{responsive.isHuge}}</div>
     </div>
+    {{! NEGATIONS }}
+    <div class="row downer">
+      <div class="col-xs-12">Negations:</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-1"> </div>
+      <div class="col-xs-3 col-sm-2 smaller">notMobile</div>
+      <div class="col-xs-8 col-sm-7 smaller">{{responsive.notMobile}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-1"> </div>
+      <div class="col-xs-3 col-sm-2 smaller">notTablet</div>
+      <div class="col-xs-8 col-sm-7 smaller">{{responsive.notTablet}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-1"> </div>
+      <div class="col-xs-3 col-sm-2 smaller">notDesktop</div>
+      <div class="col-xs-8 col-sm-7 smaller">{{responsive.notDesktop}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-1"> </div>
+      <div class="col-xs-3 col-sm-2 smaller">notLarge</div>
+      <div class="col-xs-8 col-sm-7 smaller">{{responsive.notLarge}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-1"> </div>
+      <div class="col-xs-2 smaller">notHuge</div>
+      <div class="col-xs-9 smaller">{{responsive.notHuge}}</div>
+    </div>
+
+
+    {{! GROUPINGS }}
+    <div class="row downer">
+      <div class="col-xs-12">Groups:</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-1"> </div>
+      <div class="col-xs-2 smaller"><i>biggerThanTablet</i></div>
+      <div class="col-xs-9 smaller">{{responsive.biggerThanTablet}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-1"> </div>
+      <div class="col-xs-2 smaller"><i>biggerThanDesktop</i></div>
+      <div class="col-xs-9 smaller">{{responsive.biggerThanDesktop}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-1"> </div>
+      <div class="col-xs-2 smaller"><i>smallerThanDesktop</i></div>
+      <div class="col-xs-9 smaller">{{responsive.smallerThanDesktop}}</div>
+    </div>
+
   </div>
 </div>
-

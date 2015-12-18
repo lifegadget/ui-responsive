@@ -53,11 +53,11 @@ You can set this to whatever you like by:
 this.responsive.setBreakpoints(myBrilliantBreakpoints);
 ````
 
-Now you'll see that the has a set of boolean flags like `isMobile`, `isTablet`, etc. which indicate the state you are in. As a convenience you can also get a string name back for the breakpoint size with the `deviceType` property. 
+Now you'll see that the has a set of boolean flags like `isMobile`, `isTablet`, etc. which indicate the state you are in. As a convenience you can also get a string name back for the breakpoint size with the `deviceType` property.
 
 ## Demo
 
-For an interactive demo (you'll have to change your screen size to make it be *interactive*): [ui-responsive-toolbelt](development.ui-responsive-toolbelt.divshot.io).
+For an interactive demo (you'll have to change your screen size to make it be *interactive*): [ui-responsive-toolbelt](https://ui-responsive-toolbelt.firebaseapp.com/).
 
 ## Version Compatibility
 
@@ -68,7 +68,7 @@ This may very well work with older version of Ember and Ember-CLI but it was int
 
 ## Repo Contribution
 
-We're open to your creative suggestions but please move past the "idea" stage 
+We're open to your creative suggestions but please move past the "idea" stage
 and send us a PR so we can incorporate your ideas without killing ourselves. :)
 
 ## Licensing

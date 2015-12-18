@@ -53,8 +53,10 @@ let Responsive = Ember.Service.extend({
     for (var i=0; i<breakpoints.length; i++) {
       const { id, min, max } = breakpoints[i];
       const logicOperand = 'is' + capitalize(id);
+      const negationOperand = 'not' + capitalize(id);
       const logicCondition = (!min || width >= min) && (!max || width<max);
       this.set(logicOperand, logicCondition);
+      this.set(negationOperand, !logicCondition);
       deviceType = logicCondition ? id : deviceType;
     }
     this.set('deviceType', deviceType);
@@ -67,8 +69,10 @@ let Responsive = Ember.Service.extend({
   destroy: function() {
     $(window).off('resize', this._resize);
     this._super();
-  }
-
+  },
+  biggerThanTablet: computed.or('isDesktop', 'isLarge', 'isHuge'),
+  biggerThanDesktop: computed.or( 'isLarge', 'isHuge'),
+  smallerThanDesktop: computed.or('isTablet', 'isMobile')
 });
 
 export default Responsive;

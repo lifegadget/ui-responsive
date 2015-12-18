@@ -1,0 +1,9 @@
+{
+  "firebase": "ui-responsive-toolbelt",
+  "public": "dist",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
