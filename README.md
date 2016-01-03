@@ -5,15 +5,9 @@
 
 ## Install ##
 
-- Ember-CLI versions 0.2.3+
-    ````bash
-    ember install ui-responsive-toolbelt
-    ````
-
-- Earlier CLI versions
-    ````bash
-    npm install ui-responsive-toolbelt --save-dev
-    ````
+````bash
+ember install ui-responsive
+````
 
 ## Usage ##
 
@@ -61,10 +55,10 @@ For an interactive demo (you'll have to change your screen size to make it be *i
 
 ## Version Compatibility
 
-This may very well work with older version of Ember and Ember-CLI but it was intended for:
+This probably works with older versions of Ember and Ember-CLI but it was intended for:
 
-- Ember 1.11.0+
-- Ember-CLI 0.2.3+
+- Ember 1.13.0+
+- Ember-CLI 1.13.13+
 
 ## Repo Contribution
 
