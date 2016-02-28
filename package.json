@@ -1,6 +1,6 @@
 {
   "name": "ui-responsive",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "description": "Responsive tools for your Ember app",
   "directories": {
     "doc": "doc",
@@ -16,7 +16,7 @@
     "node": ">= 0.10.0"
   },
   "files": [
-    "Brocfile.js",
+    "ember-cli-build.js",
     "LICENSE.md",
     "README.md",
     "addon",

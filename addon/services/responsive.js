@@ -16,8 +16,9 @@ let Responsive = Ember.Service.extend({
     this.setBreakpoints();
     this.resize(); // initialize before any events fired
   },
-  resizeMutex: null,
   breakpoints: null,
+  resizeDidHappen: false,
+  callbacks: [],
 
   resize: function() {
     const w = window, doc = window.document.documentElement, body = window.document.body;
@@ -43,6 +44,19 @@ let Responsive = Ember.Service.extend({
     this.signalEvent(); // signals change on mutex for CP's to listen in on
   },
 
+  /**
+   * Register a function callback for when a resize happens
+   */
+  register(cb, context) {
+    console.log('registering');
+
+    this.callbacks.push(run.bind(context, cb));
+  },
+
+  signalEvent() {
+    this.callbacks.map(cb => cb());
+  },
+
   setBreakpoints: function(setter) {
     const breakpoints = setter ? setter : defaultBreakpoints; // jshint ignore:line
     this.set('breakpoints', breakpoints);
@@ -61,9 +75,6 @@ let Responsive = Ember.Service.extend({
     }
     this.set('deviceType', deviceType);
     height = height; // grand-silliness ... will use height later, don't jshint reminding me now
-  },
-  signalEvent: function() {
-    this.notifyPropertyChange('resizeMutex');
   },
 
   destroy: function() {

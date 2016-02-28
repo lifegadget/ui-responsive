@@ -112,6 +112,19 @@
       <div class="col-xs-2 smaller"><i>smallerThanDesktop</i></div>
       <div class="col-xs-9 smaller">{{responsive.smallerThanDesktop}}</div>
     </div>
+  </div>
+  <div class="col-xs-12">
+    <h3>Registering a Callback</h3>
+    As of version 0.3.0 you can register a callback function to be notified when the screen has changed. This would most likely be done in the <b>init()</b> hook, something like:
 
+<pre><code>  init() {
+    this._super(...arguments);
+    run.schedule('afterRender', ()=> {
+      this.get('responsive').register(this.windowDidChange, this);
+    });
+  },</code></pre>
+  <p>
+    This would ensure that the <b>windowDidChange()</b> method was called every time the viewport size changed. this may seem a little contrived as you'd think you set a computed property or observer to watch the height and/or width but in fact something seems to break in the observation system when observing these properties so this is a work-around for now.
+  </p>
   </div>
 </div>

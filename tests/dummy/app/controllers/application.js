@@ -8,12 +8,31 @@ export default Ember.Controller.extend({
   toggledEnablement: false,
   isIndexPage: Ember.computed.equal('currentPath', 'index'),
   notIndexPage: Ember.computed.not('isIndexPage'),
+  init() {
+    this._super(...arguments);
+    run.schedule('afterRender', ()=> {
+      this.get('responsive').register(this.windowDidChange, this);
+    });
+  },
+
+  windowDidChange() {
+    console.log('window size changed');
+    console.log(this);
+  },
 
   screenJson: computed('responsive.width', function() {
     return JSON.stringify(this.get('responsive.screen'));
   }),
   bodyJson: computed('responsive.width', function() {
     return JSON.stringify(this.get('responsive.body'));
+  }),
+  tellMeAboutResize: computed('resizeDidHappen', function() {
+    console.log('ping');
+    this.set('computedPropertyMessage', `A resize happened ... a computed property told me`);
+    run.later(() => {
+      this.set('computedPropertyMessage','');
+    },750);
+    return null;
   }),
 
   actions: {
@@ -24,6 +43,9 @@ export default Ember.Controller.extend({
     toggleEnablement: function() {
       console.log('toggling');
       this.toggleProperty('toggledEnablement');
+    },
+    resizeDidHappen() {
+      console.log('ping');
     }
   }
 
