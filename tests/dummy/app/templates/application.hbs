@@ -2,15 +2,22 @@
   <h1 id="title">ui-responsive</h1>
   <h2>Responsive tools for your Ember app</h2>
 
-  <div class="col-xs-12 col-sm-5">
-    <img src='/images/tomster-construction.png'>
-  </div>
-  <div class="col-xs-12 col-sm-7">
-    <h3>Resources</h3>
-    <ul>
-      <li><a href="">GitHub Repo</a></li>
-      <li><a href="tests?nocontainer">Unit tests</a></li>
-    </ul>
+  <div class="row">
+    <div id='image-container' class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+      <img src='/images/tomster-construction.png'>
+    </div>
+    <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="">GitHub Repo</a></li>
+        <li><a href="tests?nocontainer">Unit tests</a></li>
+      </ul>
+      <p>
+        The image to the left has the dimensions of {{foobar.width}} x {{foobar.height}}.
+        <br>
+        Check the comments about registration to understand how this was achieved.
+      </p>
+    </div>
   </div>
   <div class="col-xs-12">
     <h3>Responsive Data</h3>
@@ -114,17 +121,17 @@
     </div>
   </div>
   <div class="col-xs-12">
-    <h3>Registering a Callback</h3>
-    As of version 0.3.0 you can register a callback function to be notified when the screen has changed. This would most likely be done in the <b>init()</b> hook, something like:
+    <h3>Registering a DOM element</h3>
+    As of version 0.3.0 you can register a set of DOM elements which should be set whenever a change is detected. This would most likely be done in the <b>init()</b> hook, something like:
 
 <pre><code>  init() {
     this._super(...arguments);
     run.schedule('afterRender', ()=> {
-      this.get('responsive').register(this.windowDidChange, this);
+      this.get('responsive').register('foobar', '#image-container');
     });
   },</code></pre>
   <p>
-    This would ensure that the <b>windowDidChange()</b> method was called every time the viewport size changed. this may seem a little contrived as you'd think you set a computed property or observer to watch the height and/or width but in fact something seems to break in the observation system when observing these properties so this is a work-around for now.
+    This registration means that there is now a new property available <code>responsive.registry.foobar</code> which has two properties "width" and "height".
   </p>
   </div>
 </div>

@@ -1,5 +1,10 @@
 import Ember from 'ember';
-const { computed, observer, A, $, run, on, typeOf, debug } = Ember;    // jshint ignore:line
+const { keys, create } = Object; // jshint ignore:line
+const { RSVP: {Promise, all, race, resolve, defer} } = Ember; // jshint ignore:line
+const { inject: {service} } = Ember; // jshint ignore:line
+const { computed, $, run, on, typeOf } = Ember;  // jshint ignore:line
+const { get, set, merge } = Ember; // jshint ignore:line
+const a = Ember.A; // jshint ignore:line
 const capitalize = Ember.String.capitalize;
 const defaultBreakpoints = [
   { id: 'mobile', max: 768, synonyms: ['xs','tiny']},
@@ -40,21 +45,28 @@ let Responsive = Ember.Service.extend({
       availWidth: w.screen.availWidth, // http://www.quirksmode.org/dom/w3c_cssom.html#t10
       availHeight: w.screen.availHeight
     });
+    this.setRegistry();
     this.configureBreakpoints(viewportWidth, viewportHeight);
-    this.signalEvent(); // signals change on mutex for CP's to listen in on
   },
 
   /**
    * Register a function callback for when a resize happens
    */
-  register(cb, context) {
-    console.log('registering');
-
-    this.callbacks.push(run.bind(context, cb));
+  register(name, dom) {
+    this._registry[name] = dom;
+    this.setRegistry();
   },
-
-  signalEvent() {
-    this.callbacks.map(cb => cb());
+  _registry: {},
+  setRegistry() {
+    const newRegistry = {};
+    const registry = this._registry || [];
+    keys(registry).forEach(item => {
+      newRegistry[item] = Ember.Object.create({
+        width:  window.$(registry[item]).width(),
+        height: window.$(registry[item]).height()
+      });
+    });
+    this.set('registry', newRegistry);
   },
 
   setBreakpoints: function(setter) {

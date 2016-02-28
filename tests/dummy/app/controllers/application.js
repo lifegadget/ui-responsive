@@ -8,16 +8,12 @@ export default Ember.Controller.extend({
   toggledEnablement: false,
   isIndexPage: Ember.computed.equal('currentPath', 'index'),
   notIndexPage: Ember.computed.not('isIndexPage'),
+  foobar: computed.alias('responsive.registry.foobar'),
   init() {
     this._super(...arguments);
     run.schedule('afterRender', ()=> {
-      this.get('responsive').register(this.windowDidChange, this);
+      this.get('responsive').register('foobar', '#image-container');
     });
-  },
-
-  windowDidChange() {
-    console.log('window size changed');
-    console.log(this);
   },
 
   screenJson: computed('responsive.width', function() {
