@@ -131,7 +131,7 @@
     });
   },</code></pre>
   <p>
-    This registration means that there is now a new property available <code>responsive.registry.foobar</code> which has two properties "width" and "height".
+    This registration means that there is now a new property available <code>responsive.registry.foobar</code> which has two properties "width" and "height". And as you're probably aware <i>async</i> can be cruel to height sometimes so when registering it will set the height immediately and then reset 50ms later if the value has changed due to content loading.
   </p>
   <p>
     If you want to deregister a DOM lookup you can do that with <code>deregister(name)</code> at any point and the service will immediately update the registry.

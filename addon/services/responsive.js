@@ -55,6 +55,7 @@ let Responsive = Ember.Service.extend({
   register(name, dom) {
     this._registry[name] = dom;
     this.setRegistry();
+    this.doubleCheck(name); // ensures height has had time to "settle"
   },
   deregister(name) {
     delete this._registry[name];
@@ -71,6 +72,15 @@ let Responsive = Ember.Service.extend({
       });
     });
     this.set('registry', newRegistry);
+  },
+  doubleCheck(name) {
+    run.later(() => {
+      const registeredValue = this.get(`registry.${name}`).height;
+      const currentValue = window.$(this._registry[name]).height();
+      if (registeredValue !== currentValue) {
+        this.set(`registry.${name}.height`, currentValue);
+      }
+    }, 50);
   },
 
   setBreakpoints: function(setter) {
