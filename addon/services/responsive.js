@@ -56,6 +56,10 @@ let Responsive = Ember.Service.extend({
     this._registry[name] = dom;
     this.setRegistry();
   },
+  deregister(name) {
+    delete this._registry[name];
+    this.setRegistry();
+  },
   _registry: {},
   setRegistry() {
     const newRegistry = {};
