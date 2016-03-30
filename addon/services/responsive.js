@@ -109,7 +109,12 @@ let Responsive = Ember.Service.extend({
   },
   biggerThanTablet: computed.or('isDesktop', 'isLarge', 'isHuge'),
   biggerThanDesktop: computed.or( 'isLarge', 'isHuge'),
-  smallerThanDesktop: computed.or('isTablet', 'isMobile')
+  smallerThanDesktop: computed.or('isTablet', 'isMobile'),
+
+  isPortrait: computed('width', 'height', function() {
+    return this.get('width') < this.get('height') ;
+  }),
+  isLandscape: computed.not('isPortrait')
 });
 
 export default Responsive;
