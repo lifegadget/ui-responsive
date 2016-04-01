@@ -17,6 +17,26 @@
         <br>
         Check the comments about registration to understand how this was achieved.
       </p>
+      <h4>Breakpoint Strategy</h4>
+      <p>
+        Traditional breakpoint strategies resolve the "device category" by looking exclusively at width which works adequately when a portrait display is assumed (as most mobile platforms are viewed in portrait). If, however, you are designing for both portrait and landscape then having the breakpoints go against the "longest edge" gives a better feel for the device category. This information combined with the orientation gives you the tools to really design to the screen real-estate.
+      </p>
+      <p>
+        You can choose between the "traditional" approach (the default) or set the <code>strategy</code> to "oriented" and get orientation-aware measurement.
+        <note>
+          Note: setting to oriented <i>assumes</i> a aspect ratio of 16:10; this may not be precisely right but it should be more accurate than the traditional strategy. If you want to set it to some other ratio you can just set strategy to a string representation of the form "w:h".
+        </note>
+      </p>
+      <p>
+        Strategy:
+        {{ui-toggle-button
+          on='oriented'
+          off='traditional'
+          valuesAre='equal'
+          value=responsive.strategy
+          onToggle=(action 'strategyChanged')
+        }}
+      </p>
     </div>
   </div>
   <div class="col-xs-12">
@@ -26,15 +46,23 @@
       <div class="col-xs-9">{{responsive.width}}</div>
     </div>
     <div class="row downer">
-      <div class="col-xs-3">Height:</div>
+      <div class="col-xs-3">height:</div>
       <div class="col-xs-9">{{responsive.height}}</div>
     </div>
     <div class="row downer">
-      <div class="col-xs-3">Screen:</div>
+      <div class="col-xs-3">largestSide:</div>
+      <div class="col-xs-9">{{responsive.largestSide}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-3">effectiveSize:</div>
+      <div class="col-xs-9">{{responsive.effectiveSize}}</div>
+    </div>
+    <div class="row downer">
+      <div class="col-xs-3">screen:</div>
       <div class="col-xs-9 smaller">{{screenJson}}</div>
     </div>
     <div class="row downer">
-      <div class="col-xs-3">Body:</div>
+      <div class="col-xs-3">body:</div>
       <div class="col-xs-9 smaller">{{bodyJson}}</div>
     </div>
     <div class="row downer">

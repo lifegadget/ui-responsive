@@ -13,6 +13,7 @@ const defaultBreakpoints = [
   { id: 'large', min: 1200, max: 1900, synonyms: ['lg','large'] },
   { id: 'huge', min: 1900, synonyms: ['hg','huge'] }
 ];
+const DEFAULT_ASPECT = 16 / 10;
 
 let Responsive = Ember.Service.extend({
   init: function() {
@@ -24,6 +25,12 @@ let Responsive = Ember.Service.extend({
   breakpoints: null,
   resizeDidHappen: false,
   callbacks: [],
+  strategy: 'traditional',
+  aspectRatio: computed('strategy', function() {
+    const strategy = this.get('strategy');
+    console.log(`strategy: ${strategy}`);
+    return a(['traditional', 'oriented']).contains(strategy) ? DEFAULT_ASPECT : strategy.split(':')[0] / strategy.split(':')[1];
+  }),
 
   resize: function() {
     const w = window, doc = window.document.documentElement, body = window.document.body;
@@ -31,6 +38,12 @@ let Responsive = Ember.Service.extend({
     const viewportHeight = w.innerHeight || doc.clientHeight;
     this.set('width', viewportWidth);
     this.set('height', viewportHeight);
+    this.set('largestSide', viewportWidth > viewportHeight ? viewportWidth : viewportHeight);
+    if (viewportWidth < viewportHeight && get(this, 'strategy') !== 'traditional') {
+      this.set('effectiveSize', Math.floor(viewportHeight * get(this, 'aspectRatio')));
+    } else {
+      this.set('effectiveSize', viewportWidth);
+    }
     this.set('viewport', {
       width: viewportWidth,
       height: viewportHeight
@@ -46,7 +59,8 @@ let Responsive = Ember.Service.extend({
       availHeight: w.screen.availHeight
     });
     this.setRegistry();
-    this.configureBreakpoints(viewportWidth, viewportHeight);
+    const {strategy, effectiveSize} = this.getProperties('strategy', 'effectiveSize');
+    this.configureBreakpoints(strategy === 'traditional' ? viewportWidth : effectiveSize);
   },
 
   /**
@@ -87,7 +101,7 @@ let Responsive = Ember.Service.extend({
     const breakpoints = setter ? setter : defaultBreakpoints; // jshint ignore:line
     this.set('breakpoints', breakpoints);
   },
-  configureBreakpoints: function(width,height) {
+  configureBreakpoints: function(width) {
     const breakpoints = this.get('breakpoints');
     let deviceType = null;
     for (var i=0; i<breakpoints.length; i++) {
@@ -100,7 +114,7 @@ let Responsive = Ember.Service.extend({
       deviceType = logicCondition ? id : deviceType;
     }
     this.set('deviceType', deviceType);
-    height = height; // grand-silliness ... will use height later, don't jshint reminding me now
+    console.log(`deviceType ${deviceType}, width: ${width}`);
   },
 
   destroy: function() {

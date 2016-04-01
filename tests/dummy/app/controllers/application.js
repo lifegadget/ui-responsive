@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
   toggledEnablement: false,
   isIndexPage: Ember.computed.equal('currentPath', 'index'),
   notIndexPage: Ember.computed.not('isIndexPage'),
+  strategy: 'traditional',
   foobar: computed.alias('responsive.registry.foobar'),
   init() {
     this._super(...arguments);
@@ -32,6 +33,10 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
+    strategyChanged(o) {
+      this.set('responsive.strategy', o.value);
+      this.get('responsive').resize();
+    },
     toggleRepression: function() {
       console.log('toggling');
       this.toggleProperty('isRepressed');

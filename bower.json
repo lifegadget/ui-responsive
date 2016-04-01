@@ -15,6 +15,7 @@
   "devDependencies": {
     "highlightjs": "~8.5.0",
     "fontawesome": "~4.3.0",
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "animate.css": "^3.5.1"
   }
 }
