@@ -1,6 +1,6 @@
 {
   "name": "ui-responsive",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Responsive tools for your Ember app",
   "directories": {
     "doc": "doc",
