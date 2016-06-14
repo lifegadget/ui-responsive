@@ -1,11 +1,7 @@
 import Ember from 'ember';
-const { keys, create } = Object; // jshint ignore:line
-const { RSVP: {Promise, all, race, resolve, defer} } = Ember; // jshint ignore:line
-const { inject: {service} } = Ember; // jshint ignore:line
-const { computed, $, run, on, typeOf } = Ember;  // jshint ignore:line
-const { get, set, merge } = Ember; // jshint ignore:line
-const a = Ember.A; // jshint ignore:line
-const capitalize = Ember.String.capitalize;
+const { keys } = Object;
+const { computed, observer, $, run, get, String: {capitalize} } = Ember;
+const a = Ember.A;
 const defaultBreakpoints = [
   { id: 'mobile', max: 768, synonyms: ['xs','tiny']},
   { id: 'tablet', min: 768, max: 992, synonyms: ['sm','small'] },
@@ -20,9 +16,12 @@ let Responsive = Ember.Service.extend({
     this._resize = run.bind(this, 'resize');
     $(window).on('resize', this._resize);
     this.setBreakpoints();
-    this.resize(); // initialize before any events fired
+    this.recalc(); // initialize before any events fired
   },
   breakpoints: null,
+  _breakpoints: observer('breakpoints', function() {
+    this.recalc();
+  }),
   resizeDidHappen: false,
   callbacks: [],
   strategy: 'traditional',
@@ -30,8 +29,10 @@ let Responsive = Ember.Service.extend({
     const strategy = this.get('strategy');
     return a(['traditional', 'oriented']).contains(strategy) ? DEFAULT_ASPECT : strategy.split(':')[0] / strategy.split(':')[1];
   }),
-
-  resize: function() {
+  resize() {
+    this.recalc();
+  },
+  recalc() {
     const w = window, doc = window.document.documentElement, body = window.document.body;
     const viewportWidth = w.innerWidth || doc.clientWidth;
     const viewportHeight = w.innerHeight || doc.clientHeight;
@@ -96,7 +97,7 @@ let Responsive = Ember.Service.extend({
     }, 50);
   },
 
-  setBreakpoints: function(setter) {
+  setBreakpoints(setter) {
     const breakpoints = setter ? setter : defaultBreakpoints; // jshint ignore:line
     this.set('breakpoints', breakpoints);
   },
