@@ -98,8 +98,8 @@ let Responsive = Ember.Service.extend({
   },
 
   setBreakpoints(setter) {
-    const breakpoints = setter ? setter : defaultBreakpoints; 
-    this.set('breakpoints', $.extend({}, breakpoints));
+    const breakpoints = setter ? setter : defaultBreakpoints;
+    this.set('breakpoints', JSON.parse(JSON.stringify(breakpoints))); // avoiding use of Ember.assign for now
   },
   configureBreakpoints: function(width) {
     const breakpoints = this.get('breakpoints');

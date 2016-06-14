@@ -1,5 +1,4 @@
-# ui-responsive-toolkit ![build status](https://travis-ci.org/lifegadget/ui-responsive.svg) [![npm version](https://badge.fury.io/js/ui-responsive-toolbelt.svg)](http://badge.fury.io/js/ui-responsive-toolbelt) [![Code Climate](https://codeclimate.com/github/lifegadget/ui-responsive-toolbelt/badges/gpa.svg)](https://codeclimate.com/github/lifegadget/ui-responsive-toolbelt) #
-
+# ui-responsive ![build status](https://travis-ci.org/lifegadget/ui-responsive.svg) ![npm version](https://badge.fury.io/js/ui-responsive.svg) ![Code Climate](https://codeclimate.com/github/lifegadget/ui-responsive-toolbelt/badges/gpa.svg) #
 
 > Responsive tools for your Ember app
 
