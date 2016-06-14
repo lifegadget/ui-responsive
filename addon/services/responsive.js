@@ -28,7 +28,6 @@ let Responsive = Ember.Service.extend({
   strategy: 'traditional',
   aspectRatio: computed('strategy', function() {
     const strategy = this.get('strategy');
-    console.log(`strategy: ${strategy}`);
     return a(['traditional', 'oriented']).contains(strategy) ? DEFAULT_ASPECT : strategy.split(':')[0] / strategy.split(':')[1];
   }),
 
@@ -114,7 +113,6 @@ let Responsive = Ember.Service.extend({
       deviceType = logicCondition ? id : deviceType;
     }
     this.set('deviceType', deviceType);
-    console.log(`deviceType ${deviceType}, width: ${width}`);
   },
 
   destroy: function() {
