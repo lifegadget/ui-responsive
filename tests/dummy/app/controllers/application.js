@@ -24,7 +24,6 @@ export default Ember.Controller.extend({
     return JSON.stringify(this.get('responsive.body'));
   }),
   tellMeAboutResize: computed('resizeDidHappen', function() {
-    console.log('ping');
     this.set('computedPropertyMessage', `A resize happened ... a computed property told me`);
     run.later(() => {
       this.set('computedPropertyMessage','');
@@ -38,15 +37,10 @@ export default Ember.Controller.extend({
       this.get('responsive').resize();
     },
     toggleRepression: function() {
-      console.log('toggling');
       this.toggleProperty('isRepressed');
     },
     toggleEnablement: function() {
-      console.log('toggling');
       this.toggleProperty('toggledEnablement');
-    },
-    resizeDidHappen() {
-      console.log('ping');
     }
   }
 
